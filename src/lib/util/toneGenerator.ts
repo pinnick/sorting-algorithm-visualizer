@@ -6,7 +6,6 @@ export class ToneGenerator {
 	private audioContext: AudioContext;
 
 	constructor() {
-		// Create an AudioContext
 		this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
 	}
 

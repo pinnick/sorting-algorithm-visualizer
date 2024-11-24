@@ -5,15 +5,7 @@ declare global {
 			highlighted: boolean;
 		}
 
-		type AlgorithmId =
-			| 'quickSort' // done
-			| 'insertionSort' // done
-			| 'mergeSort' // watch a video
-			// | 'heapSort'
-			// | 'radixSortLSD'
-			// | 'radixSortMSD'
-			| 'bubbleSort'; // working
-		// | 'bogoSort';
+		type AlgorithmId = 'quickSort' | 'insertionSort' | 'mergeSort' | 'bubbleSort';
 
 		interface SortingAlgorithm {
 			name: string;
@@ -42,15 +34,7 @@ declare global {
 		}
 
 		interface Metrics {
-			startTime: number | null;
-
-			comparisons: number;
-			arrayAccesses: number;
-
-			bestTime: number | null; // in MS
-			averageTime: number | null; // in MS
-
-			status: 'idle' | 'running' | 'paused' | 'completed' | 'error';
+			status: 'idle' | 'running' | 'completed';
 		}
 	}
 }

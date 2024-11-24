@@ -21,7 +21,7 @@ export const colors: Record<App.ColorName, string> = {
  * Default config for app
  */
 export const defaultConfig: App.Config = {
-	delay: 4,
+	delay: 50,
 	selectedAlgorithm: 'quickSort'
 };
 
@@ -29,10 +29,5 @@ export const defaultConfig: App.Config = {
  * Default metrics for when algorithms run
  */
 export const defaultMetrics: App.Metrics = {
-	startTime: null,
-	comparisons: 0,
-	arrayAccesses: 0,
-	bestTime: null,
-	averageTime: null,
 	status: 'idle'
 };
