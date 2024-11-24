@@ -13,6 +13,7 @@ node -v
 Then, to create a production version of the app:
 
 ```bash
+npm install
 npm run build
 ```
 
