@@ -12,9 +12,11 @@
 	import { Label } from '$lib/components/ui/label';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import ChevronDown from 'lucide-svelte/icons/chevron-down';
+	import Info from 'lucide-svelte/icons/info';
 
 	let countSlider = $state([100]);
 	let delaySlider = $state([Math.log($config.delay)]);
+	let showDescription = $state(false);
 
 	const algorithm = $derived(algorithms[$config.selectedAlgorithm]);
 
@@ -40,15 +42,15 @@
 
 <div class="flex h-screen w-screen flex-col overflow-hidden">
 	<div class="flex flex-1">
-		<div
-			class="flex h-full w-64 min-w-min flex-col items-center gap-y-10 overflow-y-auto bg-primary/15"
+		<!-- <div
+			class="m-4 flex w-64 min-w-min flex-col items-center justify-center gap-y-10 overflow-y-auto"
 		>
 			<Description description={algorithm.description} />
-		</div>
+		</div> -->
 
 		<div class="flex h-full flex-1 flex-col gap-2 p-3">
 			<div class="grid grid-cols-12 items-center justify-items-center space-y-2">
-				<div class="col-span-6 flex justify-center gap-2 lg:col-span-3">
+				<div class="col-span-6 ml-auto flex min-w-48 justify-center gap-2 lg:col-span-3 lg:m-auto">
 					<Button onclick={handleSort} disabled={$metrics.status !== 'idle'} class="px-2 transition"
 						><Play /></Button
 					>
@@ -58,30 +60,33 @@
 						class="px-2 transition"><Shuffle /></Button
 					>
 				</div>
-				<DropdownMenu.Root>
-					<DropdownMenu.Trigger
-						disabled={$metrics.status !== 'idle'}
-						class="col-span-6 lg:col-span-3"
-					>
-						<div
-							class="mx-auto flex w-min whitespace-nowrap rounded-sm bg-transparent p-2 transition hover:bg-white/10"
-						>
-							{algorithm.name}<ChevronDown />
-						</div>
-					</DropdownMenu.Trigger>
-					<DropdownMenu.Content>
-						<DropdownMenu.Group>
-							<DropdownMenu.Label>Sorting algorithms</DropdownMenu.Label>
-							<DropdownMenu.Separator />
-							<DropdownMenu.RadioGroup bind:value={$config.selectedAlgorithm}>
-								{#each Object.entries(algorithms) as [id, algorithm] (id)}
-									<DropdownMenu.RadioItem value={id}>{algorithm.name}</DropdownMenu.RadioItem>
-								{/each}
-							</DropdownMenu.RadioGroup>
-						</DropdownMenu.Group>
-					</DropdownMenu.Content>
-				</DropdownMenu.Root>
-
+				<div class="col-span-6 mr-auto flex gap-2 lg:col-span-3 lg:m-auto">
+					<DropdownMenu.Root>
+						<DropdownMenu.Trigger disabled={$metrics.status !== 'idle'}>
+							<div
+								class="mx-auto flex w-min whitespace-nowrap rounded-sm bg-transparent p-2 transition hover:bg-white/10"
+							>
+								{algorithm.name}<ChevronDown />
+							</div>
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content>
+							<DropdownMenu.Group>
+								<DropdownMenu.Label>Sorting algorithms</DropdownMenu.Label>
+								<DropdownMenu.Separator />
+								<DropdownMenu.RadioGroup bind:value={$config.selectedAlgorithm}>
+									{#each Object.entries(algorithms) as [id, algorithm] (id)}
+										<DropdownMenu.RadioItem value={id}>{algorithm.name}</DropdownMenu.RadioItem>
+									{/each}
+								</DropdownMenu.RadioGroup>
+							</DropdownMenu.Group>
+						</DropdownMenu.Content>
+					</DropdownMenu.Root>
+					<div class="flex">
+						<Button class="px-2" onclick={() => (showDescription = true)}>
+							<Info />
+						</Button>
+					</div>
+				</div>
 				<div class="col-span-12 grid grid-cols-2 justify-evenly gap-3 lg:col-span-6">
 					<div class="col-span-2 flex w-48 flex-col gap-2.5 md:col-span-1">
 						<Label for="count" class="whitespace-nowrap text-center">Count: {countSlider[0]}</Label>
@@ -115,4 +120,11 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Description modal -->
+	<Description
+		description={algorithm.description}
+		open={showDescription}
+		close={() => (showDescription = false)}
+	/>
 </div>
