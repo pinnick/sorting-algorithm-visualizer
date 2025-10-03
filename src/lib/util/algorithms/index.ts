@@ -22,7 +22,7 @@ export const algorithms: Record<App.AlgorithmId, App.SortingAlgorithm> = {
 		name: 'Merge Sort',
 		caption: null,
 		description:
-			'Bubble sort, also known as sinking sort, is a simple comparison-based sorting algorithm that repeatedly steps through a list, comparing and swapping adjacent elements if they are out of order, with larger elements "bubbling" to the top. It continues until no swaps are needed, indicating the list is sorted. Though easy to understand and primarily used for teaching purposes, bubble sort performs poorly in practical scenarios and is rarely used compared to more efficient algorithms like quicksort, timsort, or merge sort, which are commonly implemented in programming language libraries.',
+			"Merge sort, invented by John von Neumann in 1945, is a stable, comparison-based sorting algorithm that follows the divide-and-conquer paradigm. It works by recursively dividing the array into halves until single-element subarrays are reached, then merging these subarrays back together in sorted order. Merge sort guarantees a worst-case and average time complexity of O(n log n), but requires O(n) additional space for the merging process. It excels when the array's two halves are already sorted, achieving O(n) time in this best-case scenario.",
 		sort: mergeSort
 	},
 	bubbleSort: {
